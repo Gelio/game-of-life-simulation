@@ -31,7 +31,6 @@ export default class Game extends React.Component {
     }
 
     clearMap() {
-        console.log('clearing map');
         this.state.map.clearMap();
         this.forceUpdate();
     }

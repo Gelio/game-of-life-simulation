@@ -19,6 +19,7 @@ function init(sizeIndex) {
     this.mapSize = Config.mapSizes[sizeIndex];
 
     this.gameMap = [];
+    this.generations = 0;
 
     for(var i=0; i < this.mapSize[1]; i++) {
         this.gameMap.push([]);
@@ -31,7 +32,7 @@ function init(sizeIndex) {
 
 function randomMap(elements) {
     if(!elements)
-        elements = Config.randomElements;
+        elements = Config.randomElements*this.mapSize[0]*this.mapSize[1];
 
     if(!this.gameMap) {
         throw new Error('Map needs to be initialized first');
@@ -74,6 +75,7 @@ function tick() {
     });
 
     this.gameMap = newMap;
+    this.generations++;
 }
 
 function countActiveCellsAround(x, y) {
@@ -109,6 +111,7 @@ function clearMap() {
             this.gameMap[columnIndex][rowIndex] = 0;
         });
     });
+    this.generations = 0;
 
     return true;
 }

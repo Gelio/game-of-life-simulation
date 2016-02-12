@@ -60,6 +60,8 @@ export default class Settings extends React.Component {
                 <div>{buttons.slice(0, 2)}</div>
                 <div>{buttons.slice(2, 2+Config.mapSizes.length)}</div>
                 <div>{buttons.slice(2+Config.mapSizes.length, 2+Config.mapSizes.length+Config.speeds.length)}</div>
+
+                <div>Generations: {this.props.map.generations}</div>
             </div>
         );
     }
