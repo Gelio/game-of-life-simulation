@@ -4,7 +4,8 @@ var Map = {
     init: init,
     randomMap: randomMap,
     getCellStatus: getCellStatus,
-    tick: tick
+    tick: tick,
+    countActiveCellsAround: countActiveCellsAround
 };
 
 export default Map;
@@ -54,4 +55,50 @@ function getCellStatus(x, y) {
 function tick() {
     // Play the game, make a tick
     console.log('Map tick');
+    this.gameMap.forEach((row, columnIndex) => {
+        row.forEach((cell, rowIndex) => {
+            var aliveNeighbours = this.countActiveCellsAround(rowIndex, columnIndex),
+                isActive = cell;
+
+            if(isActive && (aliveNeighbours < 2 || aliveNeighbours > 3))
+                isActive = 0;
+            else if(!isActive && aliveNeighbours == 3)
+                isActive = 1;
+
+            this.gameMap[columnIndex][rowIndex] = isActive;
+        });
+    });
+}
+
+function countActiveCellsAround(x, y) {
+    var count = 0,
+        minX = -1, minY = -1,
+        maxX = 1, maxY = 1;
+
+    if(x == 0)
+        minX = 0;
+    if(x == this.mapSize[0]-1)
+        maxX = 0;
+
+    if(y == 0)
+        minY = 0;
+    if(y == this.mapSize[1]-1)
+        maxY = 0;
+
+    for(var i=minX; i <= maxX; i++)
+        for(var j=minY; j <= maxY; j++) {
+            if(i == 0 && j == 0) continue;
+
+            try {
+                if(this.gameMap[y+j][x+i])
+                    count++;
+            }
+            catch(e) {
+                console.log(e, y, j, x, i);
+                debugger;
+            }
+
+        }
+
+    return count;
 }
