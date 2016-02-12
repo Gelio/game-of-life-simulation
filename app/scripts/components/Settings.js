@@ -28,6 +28,10 @@ export default class Settings extends React.Component {
         this.props.setGameSpeed(newGameSpeed);
     }
 
+    disableButtonWhileRunning() {
+        return !this.props.paused;
+    }
+
     getButtons() {
         var buttons = [];
 
@@ -42,7 +46,7 @@ export default class Settings extends React.Component {
 
         // Second row - map sizes
         Config.mapSizes.forEach((mapSize, i) => {
-            buttons.push(<Button title={mapSize[0] + 'x' + mapSize[1]} style="btn-secondary" click={this.setMapSize.bind(this, i)} key={buttons.length} />);
+            buttons.push(<Button title={mapSize[0] + 'x' + mapSize[1]} style="btn-secondary" disabled={this.disableButtonWhileRunning()} click={this.setMapSize.bind(this, i)} key={buttons.length} />);
         });
 
         // Third row - game speeds
