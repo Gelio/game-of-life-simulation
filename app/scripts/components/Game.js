@@ -39,6 +39,7 @@ export default class Game extends React.Component {
         clearInterval(this.state.interval);
         this.setState({
             speed: newSpeed,
+            paused: false,
             interval: setInterval(this.tick.bind(this), Config.speeds[newSpeed])
         });
     }

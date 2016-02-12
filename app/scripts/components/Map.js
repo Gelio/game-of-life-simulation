@@ -17,7 +17,7 @@ export default class Map extends React.Component {
             cells.push([]);
             row.forEach((cell, x) => {
                 cells[cells.length-1].push(
-                    <Cell key={index} status={this.props.map.getCellStatus(x, y)} switchCell={this.switchCell.bind(this, x, y)} />
+                    <Cell key={index} status={this.props.map.getCellStatus(x, y)} switchCell={this.switchCell.bind(this, x, y)} width={100/this.props.map.mapSize[0]} />
                 );
                 index++;
             });

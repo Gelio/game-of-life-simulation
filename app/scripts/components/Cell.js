@@ -7,7 +7,7 @@ export default class Cell extends React.Component {
 
     render() {
         return (
-            <div class={this.getClass()} onClick={this.props.switchCell}></div>
+            <div class={this.getClass()} onClick={this.props.switchCell} style={{width: this.props.width + "%"}}></div>
         );
     }
 }
