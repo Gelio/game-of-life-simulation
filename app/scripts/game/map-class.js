@@ -56,9 +56,10 @@ function getCellStatus(x, y) {
 
 function tick() {
     // Play the game, make a tick
-    var newMap = this.gameMap.slice(0);
+    var newMap = [];
 
     this.gameMap.forEach((row, columnIndex) => {
+        newMap.push([]);
         row.forEach((cell, rowIndex) => {
             var aliveNeighbours = this.countActiveCellsAround(rowIndex, columnIndex),
                 isActive = cell;
@@ -90,7 +91,6 @@ function countActiveCellsAround(x, y) {
     if(y == this.mapSize[1]-1)
         maxY = 0;
 
-    if(x == 1 && y == 1) debugger;
 
     for(var i=minX; i <= maxX; i++)
         for(var j=minY; j <= maxY; j++) {
