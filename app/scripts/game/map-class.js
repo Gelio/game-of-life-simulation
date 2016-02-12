@@ -5,13 +5,15 @@ var Map = {
     randomMap: randomMap,
     getCellStatus: getCellStatus,
     tick: tick,
-    countActiveCellsAround: countActiveCellsAround
+    countActiveCellsAround: countActiveCellsAround,
+    clearMap: clearMap,
+    switchCell: switchCell
 };
 
 export default Map;
 
 function init(sizeIndex) {
-    if(!sizeIndex || sizeIndex < 0 || sizeIndex >= Config.mapSizes.length)
+    if(sizeIndex === undefined || sizeIndex < 0 || sizeIndex >= Config.mapSizes.length)
         sizeIndex = Config.defaultMapSize;
 
     this.mapSize = Config.mapSizes[sizeIndex];
@@ -55,19 +57,25 @@ function getCellStatus(x, y) {
 function tick() {
     // Play the game, make a tick
     console.log('Map tick');
+    var newMap = this.gameMap.slice(0);
+
     this.gameMap.forEach((row, columnIndex) => {
         row.forEach((cell, rowIndex) => {
             var aliveNeighbours = this.countActiveCellsAround(rowIndex, columnIndex),
                 isActive = cell;
+
+            if(isActive) debugger;
 
             if(isActive && (aliveNeighbours < 2 || aliveNeighbours > 3))
                 isActive = 0;
             else if(!isActive && aliveNeighbours == 3)
                 isActive = 1;
 
-            this.gameMap[columnIndex][rowIndex] = isActive;
+            newMap[columnIndex][rowIndex] = isActive;
         });
     });
+
+    this.gameMap = newMap;
 }
 
 function countActiveCellsAround(x, y) {
@@ -88,17 +96,24 @@ function countActiveCellsAround(x, y) {
     for(var i=minX; i <= maxX; i++)
         for(var j=minY; j <= maxY; j++) {
             if(i == 0 && j == 0) continue;
-
-            try {
-                if(this.gameMap[y+j][x+i])
-                    count++;
-            }
-            catch(e) {
-                console.log(e, y, j, x, i);
-                debugger;
-            }
-
+            
+            if(this.gameMap[y+j][x+i])
+                count++;
         }
 
     return count;
+}
+
+function clearMap() {
+    this.gameMap.forEach((row, columnIndex) => {
+        row.forEach((cell, rowIndex) => {
+            this.gameMap[columnIndex][rowIndex] = 0;
+        });
+    });
+
+    return true;
+}
+
+function switchCell(x, y) {
+    this.gameMap[y][x] = !this.gameMap[y][x];
 }

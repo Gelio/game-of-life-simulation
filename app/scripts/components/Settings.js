@@ -17,6 +17,10 @@ export default class Settings extends React.Component {
     }
 
     setMapSize(newMapSize) {
+        this.setState({
+            selectedMapSize: newMapSize
+        });
+
         this.props.setMapSize(newMapSize);
     }
 

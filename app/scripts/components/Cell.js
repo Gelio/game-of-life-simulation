@@ -1,19 +1,13 @@
 import React from 'react';
 
 export default class Cell extends React.Component {
-    componentWillMount() {
-        this.state = {
-            status: this.props.status
-        };
-    }
-
-    shouldComponentUpdate() {
-        return this.state.status !== this.props.status;
+    getClass() {
+        return 'cell' + (this.props.status ? ' active' : '');
     }
 
     render() {
         return (
-            <span>{this.state.status}</span>
+            <div class={this.getClass()} onClick={this.props.switchCell}></div>
         );
     }
 }

@@ -3,7 +3,11 @@ import React from 'react';
 import Cell from './Cell';
 
 export default class Map extends React.Component {
-    componentWillMount() {
+    switchCell(x, y) {
+        this.props.switchCell(x, y);
+    }
+
+    getCells() {
         // Create cells
         var gameMap = this.props.map.gameMap,
             index = 0,
@@ -13,33 +17,28 @@ export default class Map extends React.Component {
             cells.push([]);
             row.forEach((cell, x) => {
                 cells[cells.length-1].push(
-                    <Cell key={index} status={this.props.map.getCellStatus(x, y)} />
+                    <Cell key={index} status={this.props.map.getCellStatus(x, y)} switchCell={this.switchCell.bind(this, x, y)} />
                 );
                 index++;
             });
         });
 
-        this.setState({
-            cells: cells,
-            mapSize: this.props.map.mapSize
-        });
-
-        console.log('mouinting');
+        return cells;
     }
 
-    shouldComponentUpdate() {
+    /*shouldComponentUpdate() {
         if(this.state.mapSize !== this.props.map.mapSize)
             this.componentWillMount();
 
         return true;
-    }
+    }*/
 
     render() {
         return (
             <div class="col-md-8 col-md-push-2 m-t-2">
-                {this.state.cells.map((row, i) => {
+                {this.getCells().map((row, i) => {
                     return (
-                        <div key={i}>{row}</div>
+                        <div key={i} class="clearfix">{row}</div>
                     );
                 })}
             </div>

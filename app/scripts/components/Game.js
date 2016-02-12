@@ -9,7 +9,6 @@ export default class Game extends React.Component {
     constructor() {
         super();
 
-        // Set it to running
         this.state = {
             map: Object.create(MapClass),
             paused: false,
@@ -31,8 +30,9 @@ export default class Game extends React.Component {
             this.setGameSpeed(this.state.speed);
     }
 
-    clearMap(newSize) {
-        this.state.map.init(newSize);
+    clearMap() {
+        console.log('clearing map');
+        this.state.map.clearMap();
         this.forceUpdate();
     }
 
@@ -52,9 +52,15 @@ export default class Game extends React.Component {
         this.forceUpdate();
     }
 
+    switchCell(x, y) {
+        console.log('switching cell', x, y);
+        this.state.map.switchCell(x, y);
+        this.forceUpdate();
+    }
+
     tick() {
         this.state.map.tick();
-        //this.forceUpdate();
+        this.forceUpdate();
     }
 
     render() {
@@ -69,7 +75,9 @@ export default class Game extends React.Component {
                           setGameSpeed={this.setGameSpeed.bind(this)}
                 />
 
-                <Map map={this.state.map} />
+                <Map map={this.state.map}
+                     switchCell={this.switchCell.bind(this)}
+                />
             </div>
         );
     }

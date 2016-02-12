@@ -5,3 +5,16 @@
 .settings-button {
   margin: 0.2em;
 }
+
+.cell {
+  display: inline-block;
+  float: left;
+
+  width: 10px;
+  height: 10px;
+  background-color: black;
+
+  &.active {
+    background-color: yellow;
+  }
+}
