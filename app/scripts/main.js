@@ -2,11 +2,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Components
+import Header from './components/Header';
+import Game from './components/Game';
+
 class Layout extends React.Component {
     render() {
         return (
-            <h1>Hello world</h1>
-        )
+            <div>
+                <Header />
+
+                <Game />
+            </div>
+        );
     }
 }
 
