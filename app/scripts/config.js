@@ -13,5 +13,5 @@ export default {
         200
     ],
     speedLabels: ['Slow', 'Normal', 'Fast'],
-    defaultSpeed: 1     // index of the element in speeds array
+    defaultSpeed: 0     // index of the element in speeds array
 }

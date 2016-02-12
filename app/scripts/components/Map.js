@@ -36,11 +36,13 @@ export default class Map extends React.Component {
     render() {
         return (
             <div class="col-md-8 col-md-push-2 m-t-2">
-                {this.getCells().map((row, i) => {
-                    return (
-                        <div key={i} class="clearfix">{row}</div>
-                    );
-                })}
+                <div class="game-map">
+                    {this.getCells().map((row, i) => {
+                        return (
+                            <div key={i} class="clearfix">{row}</div>
+                        );
+                    })}
+                </div>
             </div>
         );
     }

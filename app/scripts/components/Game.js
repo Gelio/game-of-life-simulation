@@ -53,7 +53,6 @@ export default class Game extends React.Component {
     }
 
     switchCell(x, y) {
-        console.log('switching cell', x, y);
         this.state.map.switchCell(x, y);
         this.forceUpdate();
     }
