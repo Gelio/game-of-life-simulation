@@ -3,7 +3,8 @@ import Config from '../config';
 var Map = {
     init: init,
     randomMap: randomMap,
-    getCellStatus: getCellStatus
+    getCellStatus: getCellStatus,
+    tick: tick
 };
 
 export default Map;
@@ -48,4 +49,9 @@ function randomNumber(max) {
 
 function getCellStatus(x, y) {
     return this.gameMap[y][x];
+}
+
+function tick() {
+    // Play the game, make a tick
+    console.log('Map tick');
 }
