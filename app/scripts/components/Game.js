@@ -61,6 +61,12 @@ export default class Game extends React.Component {
         this.forceUpdate();
     }
 
+    randomizeMap() {
+        this.state.map.clearMap();
+        this.state.map.randomMap();
+        this.forceUpdate();
+    }
+
     render() {
         return (
             <div>
@@ -71,6 +77,7 @@ export default class Game extends React.Component {
                           setSpeed={this.setGameSpeed.bind(this)}
                           setMapSize={this.setMapSize.bind(this)}
                           setGameSpeed={this.setGameSpeed.bind(this)}
+                          randomize={this.randomizeMap.bind(this)}
                 />
 
                 <Map map={this.state.map}

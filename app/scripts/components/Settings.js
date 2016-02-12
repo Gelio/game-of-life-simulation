@@ -38,6 +38,7 @@ export default class Settings extends React.Component {
             buttons.push(<Button title="Pause" style="btn-primary" click={this.props.pauseGame} key="0" />);
 
         buttons.push(<Button title="Clear" style="btn-secondary" click={this.clearMap.bind(this)} key="1" />);
+        buttons.push(<Button title="Randomize" style="btn-secondary" click={this.props.randomize} key="2" />);
 
         // Second row - map sizes
         Config.mapSizes.forEach((mapSize, i) => {
@@ -57,9 +58,9 @@ export default class Settings extends React.Component {
 
         return (
             <div class="col-md-8 col-md-push-2 text-xs-center clearfix">
-                <div>{buttons.slice(0, 2)}</div>
-                <div>{buttons.slice(2, 2+Config.mapSizes.length)}</div>
-                <div>{buttons.slice(2+Config.mapSizes.length, 2+Config.mapSizes.length+Config.speeds.length)}</div>
+                <div>{buttons.slice(0, 3)}</div>
+                <div>{buttons.slice(3, 3+Config.mapSizes.length)}</div>
+                <div>{buttons.slice(3+Config.mapSizes.length, 3+Config.mapSizes.length+Config.speeds.length)}</div>
 
                 <div>Generations: {this.props.map.generations}</div>
             </div>
